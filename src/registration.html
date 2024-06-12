@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dagens bild | Registrering</title>
+
+    <link rel="icon" href="/src/assets/favicon.ico">
+    <link rel="stylesheet" href="/src/css/main.css">
+    <script src="/src/js/main.js" type="module"></script>
+    <script src="https://kit.fontawesome.com/e49202e377.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Startsida</a></li>
+                <li><a class="currentPage" href="registration.html">Registrering</a></li>
+                <li><a href="mypage.html">Min sida <i class="fa-solid fa-lock"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Registrering</h1>
+
+        <p>
+            Gillar du också trevliga bilder? Då är detta sidan för dig!
+            <br>
+            Registrera dig nu och få tillgång till en ny bild varje dag.
+        </p>
+
+        <div class="form-container">
+            <form id="login" method="post" action="index.html">
+                <br>
+                <label for="username">Välj användarnamn:</label>
+                <br>
+                <input type="text" id="username" name="username" required>
+                <br>
+                <br>
+                <label for="password">Välj lösenord:</label>
+                <br>
+                <input type="password" id="password" name="password" required>
+                <br>
+                <br>
+                <button type="submit">Registrera</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

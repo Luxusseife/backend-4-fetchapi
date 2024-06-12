@@ -1,0 +1,186 @@
+/* Återställer default-värden. */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* GENERELLT FÖR ALLA SIDOR. */
+
+/* Body. */
+body {
+    background-color: #f2f0f3;
+    color: #000000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header. */
+header {
+    background-color: #000000;
+    color: #ffffff;
+    width: 100%;
+    height: 75px;
+    text-align: center;
+}
+
+nav {
+    padding-top: 1.5rem;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    text-shadow: 2px 2px 2px #000000;
+
+    &:hover {
+        text-decoration: underline;
+    }
+
+    &:visited {
+        color: #ffffff;
+    }
+}
+
+.currentPage {
+    background-color: #f2f0f3;
+    color: #000000;
+    font-weight: bold;
+    padding: 2rem 1.5rem 2rem 1.5rem;
+    text-shadow: 1.5px 1.5px 3px #ffffff;
+
+    &:visited {
+        color: #000000;
+    }
+
+    .fa-solid {
+        color: #000000;
+        padding-left: 5px;
+    }
+}
+
+.fa-solid {
+    color: #ffffff;
+    padding-left: 5px;
+}
+
+p {
+    margin: 3rem 1rem;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+}
+
+#login {
+    font-weight: bold;
+
+    input {
+        height: 1.5rem;
+        border-radius: 2px;
+    }
+
+    button {
+        background-color: #577e6c;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 5px 10px;
+        border-radius: 2px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #e6e668;
+            color: black;
+        }
+    }
+}
+
+.logout {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+
+    button {
+        background-color: #577e6c;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 5px 10px;
+        border-radius: 2px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #e6e668;
+            color: black;
+        }
+    }
+}
+
+
+/* Rubriker. */
+h1 {
+    text-align: center;
+    margin: 3rem 0.5rem 0 0.5rem;
+    text-shadow: 2px 2px 3px #ffffff;
+}
+
+h2 {
+    margin: 0 0 2rem 3rem;
+    font-weight: bold;
+    color: #362d29;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    margin: 0 1rem;
+
+    img {
+        height: 100%;
+        width: 100%;
+        border: 5px solid black;
+    }
+}
+
+
+@media (min-width: 426px) {
+
+    nav ul {
+        display: flex;
+        justify-content: center;
+    }
+
+    nav ul li {
+        display: inline;
+        padding: 0 3rem 0 3rem;
+    }
+
+    nav ul li a {
+        font-size: 20px;
+        text-decoration: none;
+    }
+
+    .img-container {
+        display: flex;
+        justify-content: center;
+        margin: 0 5rem;
+    
+        img {
+            height: 100%;
+            width: 100%;
+            max-width: 750px;
+            border: 5px solid black;
+        }
+    }
+}

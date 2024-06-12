@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dagens bild | Startsida</title>
+
+    <link rel="icon" href="/src/assets/favicon.ico">
+    <link rel="stylesheet" href="/src/css/main.css">
+    <script src="/src/js/main.js" type="module"></script>
+    <script src="https://kit.fontawesome.com/e49202e377.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a class="currentPage" href="index.html">Startsida</a></li>
+                <li><a href="registration.html">Registrering</a></li>
+                <li><a href="mypage.html">Min sida <i class="fa-solid fa-lock"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Välkommen till <i>Dagens bild!</i></h1>
+
+        <p>
+            Detta är sidan för dig som gillar trevliga bilder. Logga in nedan för att se dagens bild. 
+            <br>
+            Om du inte har ett konto, registrera dig <a href="registration.html">här</a>!
+        </p>
+
+        <div class="form-container">
+            <form id="login" method="post" action="mypage.html">
+                <br>
+                <label for="username">Användarnamn:</label>
+                <br>
+                <input type="text" id="username" name="username" required>
+                <br>
+                <br>
+                <label for="password">Lösenord:</label>
+                <br>
+                <input type="password" id="password" name="password" required>
+                <br>
+                <br>
+                <button type="submit">Logga in</button>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>
