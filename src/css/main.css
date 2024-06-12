@@ -82,7 +82,7 @@ p {
     justify-content: center;
 }
 
-#login {
+#login, #register {
     font-weight: bold;
 
     input {
