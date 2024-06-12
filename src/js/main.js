@@ -2,62 +2,72 @@
 
 // Funktionalitet för att registrera en användare, logga in som användare och få åtkomst till skyddad route.
 
-// Funktion som kör vid sidladdning efter koll om registrerings-element finns.
-window.onload = () => {
-    if (document.getElementById("register")) {
-        regUser();
-    }
+// Villkor; kollar om formuläret finns på aktuell sida.
+if (document.getElementById("register")) {
+    document.getElementById("register").addEventListener("submit", checkInput);
 }
 
 // Funktion som registrerar en användare.
-async function regUser() {
+async function regUser(username, password) {
 
-    // Hämtar in element.
-    const regForm = document.getElementById('register');
+    // API-url.
+    const regUrl = "http://127.0.0.1:3000/api/register";
 
-    // Förhindrar default-beteende.
-    regForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
+    // AJAX-anrop med metoden POST.
+    try {
+        const response = await fetch(regUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ username, password })
+        });
 
-        // Hämtar in inputvärden.
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
+        // Villkor, om registrering lyckas.
+        if (response.ok) {
+            // Rensar formulär på inputvärden.
+            document.getElementById("register").reset();
 
-        // API-url.
-        const regUrl = "http://127.0.0.1:3000/api/register";
+            // Skickar en alert till användaren om lyckad registering.
+            alert("Ditt användarkonto har registrerats! Du kan nu logga in.");
 
-        // AJAX-anrop med metoden POST.
-        try {
-            const response = await fetch(regUrl, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ username, password })
-            });
-
-            // Villkor, om registrering lyckas.
-            if (response.ok) {
-            
-                // Rensar formulär på inputvärden.
-                document.getElementById("register").reset();
-
-                // Skickar en alert till användaren om lyckad registering.
-                alert("Ditt användarkonto har registrerats! Du kan nu logga in.");
-
-                // Dirigerar om till index.html.
-                window.location.href = 'index.html';
-
-            // Felmeddelande vid misslyckad registrering.
-            } else {
-                const regErrors = document.getElementById("error-container");
-                regErrors.textContent = "Registreringen misslyckades. Prova igen!";
-            }
-        // Felmeddelande om fel vid anropet. 
-        } catch (error) {
+            // Dirigerar om till index.html.
+            window.location.href = 'index.html';
+        } else {
             const regErrors = document.getElementById("error-container");
-            regErrors.textContent = "Det uppstod ett fel vid registrering: " + error.message;
-            console.error("Error vid registrering: ", error);
+            regErrors.innerHTML = "Registreringen misslyckades. Prova igen!";
         }
-    })
-};
+    } catch (error) {
+        const regErrors = document.getElementById("error-container");
+        regErrors.innerHTML = "Det uppstod ett fel vid registrering: " + error.message;
+        console.error("Error vid registrering: ", error);
+    }
+}
+
+// Kontrollering av input.
+function checkInput(event) {
+
+    // Hanterar default för submit vid formulär.
+    event.preventDefault();
+
+    // Hämtar in inputvärden.
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    // Felmeddelande i formuläret.
+    const regErrors = document.getElementById("error-container");
+    // Rensar tidigare felmeddelanden.
+    regErrors.innerHTML = "";
+
+    // Kontroll av input.
+    if (username === "" || password === "") {
+        // Visar ett felmeddelande till användaren om att input saknas.
+        regErrors.innerHTML = "Användarnamn och lösenord måste anges!";
+        // Koden exekveras inte vidare om input saknas.
+        return;
+
+    // Skickar med inputvärden till funktionen regUser.
+    } else {
+        regUser(username, password);
+    }
+}
