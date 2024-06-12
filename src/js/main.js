@@ -32,7 +32,7 @@ async function regUser(username, password) {
             alert("Ditt användarkonto har registrerats! Du kan nu logga in.");
 
             // Dirigerar om till index.html.
-            window.location.href = 'index.html';
+            window.location.href = "index.html";
         } else {
             const regErrors = document.getElementById("error-container");
             regErrors.innerHTML = "Registreringen misslyckades. Prova igen!";
@@ -71,3 +71,22 @@ function checkInput(event) {
         regUser(username, password);
     }
 }
+
+// Lägger till händelselyssnare för synligt/osynligt lösenord när registrerings-sidan laddas.
+document.addEventListener("DOMContentLoaded", () => {
+    const passwordCheckbox = document.getElementById("show-password");
+    const passwordInput = document.getElementById("password");
+
+    // Villkor.
+    if (passwordCheckbox) {
+        passwordCheckbox.addEventListener("change", () => {
+            // Visar text om i-bockad.
+            if (passwordCheckbox.checked) {
+                passwordInput.type = "text";
+            // Osynligt lösenord om inte i-bockad (prickar). 
+            } else {
+                passwordInput.type = "password";
+            }
+        });
+    }
+});
