@@ -2,9 +2,19 @@
 
 // Funktionalitet för att registrera en användare, logga in som användare och få åtkomst till skyddad route.
 
-// Villkor; kollar om formuläret finns på aktuell sida.
-if (document.getElementById("register")) {
-    document.getElementById("register").addEventListener("submit", checkInput);
+
+// Kontroll om registrerings- eller inloggningsformuläret finns på aktuell sida.
+const regForm = document.getElementById("register");
+const loginForm = document.getElementById("login");
+
+// Registreringsformulär.
+if (regForm) {
+    regForm.addEventListener("submit", (event) => checkInput(event, "register"));
+}
+
+// Inloggningsformulär.
+if (loginForm) {
+    loginForm.addEventListener("submit", (event) => checkInput(event, "login"));
 }
 
 // Funktion som registrerar en användare.
@@ -33,19 +43,59 @@ async function regUser(username, password) {
 
             // Dirigerar om till index.html.
             window.location.href = "index.html";
+
+            // Felmeddelande om registrering misslyckas.
         } else {
-            const regErrors = document.getElementById("error-container");
-            regErrors.innerHTML = "Registreringen misslyckades. Prova igen!";
+            const formErrors = document.getElementById("error-container");
+            formErrors.innerHTML = "Registreringen misslyckades. Prova igen!";
         }
+        // Felmeddelande om fel vid registrering.
     } catch (error) {
-        const regErrors = document.getElementById("error-container");
-        regErrors.innerHTML = "Det uppstod ett fel vid registrering: " + error.message;
-        console.error("Error vid registrering: ", error);
+        const formErrors = document.getElementById("error-container");
+        formErrors.innerHTML = "Det uppstod ett fel vid registrering: " + error.message;
+        console.error("Fel vid registrering: ", error);
+    }
+}
+
+// Funktion som loggar in en användare.
+async function loginUser(username, password) {
+
+    // API-url.
+    const logUrl = "http://127.0.0.1:3000/api/login";
+
+    // AJAX-anrop med metoden POST.
+    try {
+        const response = await fetch(logUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ username, password })
+        });
+
+        // Villkor, om inloggning lyckas.
+        if (response.ok) {
+            // Rensar formulär på inputvärden.
+            document.getElementById("login").reset();
+
+            // Dirigerar om till den skyddade sidan mypage.html.
+            window.location.href = "mypage.html";
+
+            // Felmeddelande om inloggning misslyckas.
+        } else {
+            const formErrors = document.getElementById("error-container");
+            formErrors.innerHTML = "Inloggningen misslyckades. Prova igen!";
+        }
+        // Felmeddelande om fel vid inloggning.
+    } catch (error) {
+        const formErrors = document.getElementById("error-container");
+        formErrors.innerHTML = "Det uppstod ett fel vid inloggningen: " + error.message;
+        console.error("Fel vid inloggning: ", error);
     }
 }
 
 // Kontrollering av input.
-function checkInput(event) {
+function checkInput(event, formType) {
 
     // Hanterar default för submit vid formulär.
     event.preventDefault();
@@ -55,21 +105,23 @@ function checkInput(event) {
     const password = document.getElementById("password").value;
 
     // Felmeddelande i formuläret.
-    const regErrors = document.getElementById("error-container");
+    const formErrors = document.getElementById("error-container");
     // Rensar tidigare felmeddelanden.
-    regErrors.innerHTML = "";
+    formErrors.innerHTML = "";
 
     // Kontroll av input.
     if (username === "" || password === "") {
         // Visar ett felmeddelande till användaren om att input saknas.
-        regErrors.innerHTML = "Användarnamn och lösenord måste anges!";
+        formErrors.innerHTML = "Användarnamn och lösenord måste anges!";
         // Koden exekveras inte vidare om input saknas.
         return;
-
-    // Skickar med inputvärden till funktionen regUser.
-    } else {
-        regUser(username, password);
     }
+
+    // Skickar med inputvärden, antingen till regUser eller loginUser.
+    if (formType === "register") {
+        regUser(username, password);
+    } else if (formType === "login")
+        loginUser(username, password);
 }
 
 // Lägger till händelselyssnare för synligt/osynligt lösenord när registrerings-sidan laddas.
@@ -83,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Visar text om i-bockad.
             if (passwordCheckbox.checked) {
                 passwordInput.type = "text";
-            // Osynligt lösenord om inte i-bockad (prickar). 
+                // Osynligt lösenord om inte i-bockad (prickar). 
             } else {
                 passwordInput.type = "password";
             }
