@@ -36,8 +36,10 @@ header {
         display: inline;
     }
 
+    /* Länkar. */
     nav ul li a {
         text-decoration: none;
+        color: #ffffff;
 
         &:hover {
             text-decoration: underline;
@@ -110,6 +112,7 @@ p {
             margin: 1rem 0;
         }
 
+        /* Knapp för logga in/registrera. */
         button {
             background-color: #577e6c;
             color: #ffffff;
@@ -130,6 +133,7 @@ p {
 
 /* MIN SIDA. */
 
+/* Container för logga ut-knapp. */
 .logout {
     display: flex;
     justify-content: center;
@@ -151,6 +155,7 @@ p {
     }
 }
 
+/* Bild-container. */
 .img-container {
     display: flex;
     justify-content: center;
@@ -161,6 +166,12 @@ p {
         width: 100%;
         border: 5px solid black;
     }
+}
+
+/* Bildtext. */
+#img-p {
+    font-size: 12px;
+    margin: 0;
 }
 
 /* Mediaquery för större skärmar. */

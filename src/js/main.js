@@ -74,7 +74,7 @@ async function regUser(username, password) {
             // Dirigerar om till index.html.
             window.location.href = "index.html";
 
-            // Felmeddelande om registrering misslyckas.
+        // Felmeddelande om registrering misslyckas.
         } else {
             const formErrors = document.getElementById("error-container");
             formErrors.innerHTML = "Registreringen misslyckades. Prova igen!";
@@ -148,7 +148,7 @@ function checkAuthentication() {
 
 // Funktion som loggar ut en användare.
 function logoutUser() {
-    // Ta bort autentiseringstoken från sessionStorage.
+    // Tar bort autentiseringstoken från sessionStorage.
     sessionStorage.removeItem("authToken");
     // Skickar en alert som bekräftelse på utloggning.
     alert("Nu är du utloggad.");
@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
         logoutButton.addEventListener("click", logoutUser);
     }
 
-    // Kontrollera autentisering om användaren är på "Min sida".
+    // Kontrollerar autentisering om användaren är på "Min sida".
     if (window.location.pathname.endsWith("mypage.html")) {
         checkAuthentication();
     }
@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const passwordCheckbox = document.getElementById("show-password");
     const passwordInput = document.getElementById("password");
 
-    // Villkor.
+    // Villkor för checkbox.
     if (passwordCheckbox) {
         passwordCheckbox.addEventListener("change", () => {
             // Visar text om i-bockad.
