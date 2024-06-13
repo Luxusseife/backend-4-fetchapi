@@ -134,7 +134,7 @@ function isLoggedIn() {
     return token !== null;
 }
 
-// Kontrollera autentisering på "Min sida".
+// Funktion som kontrollerar autentisering på "Min sida".
 function checkAuthentication() {
     if (!isLoggedIn()) {
         // Om användaren inte är inloggad, visa en alert och omdirigera till index.html.
@@ -146,8 +146,26 @@ function checkAuthentication() {
     }
 }
 
+// Funktion som loggar ut en användare.
+function logoutUser() {
+    // Ta bort autentiseringstoken från sessionStorage.
+    sessionStorage.removeItem("authToken");
+    // Skickar en alert som bekräftelse på utloggning.
+    alert("Nu är du utloggad.");
+    // Omdirigerar till startsidan.
+    window.location.href = "index.html";
+}
+
 // Händelselyssnare vid sidladdning.
 document.addEventListener("DOMContentLoaded", () => {
+
+    // Hämtar logga ut-knapp.
+    const logoutButton = document.getElementById("logout-button");
+
+    // Villkor, vid klick körs funktionen logoutUser.
+    if (logoutButton) {
+        logoutButton.addEventListener("click", logoutUser);
+    }
 
     // Kontrollera autentisering om användaren är på "Min sida".
     if (window.location.pathname.endsWith("mypage.html")) {
